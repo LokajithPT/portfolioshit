@@ -6,41 +6,51 @@ export default function App() {
   const [startGlitch, setStartGlitch] = useState(false);
   const [flash, setFlash] = useState(false);
   const [reveal, setReveal] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const videoRef = useRef(null);
 
   const handleClick = () => {
     setStartGlitch(true);
 
     setTimeout(() => {
-      videoRef.current.style.display = 'block';
-	    videoRef.current.muted = false;
-	    videoRef.current.volume = 0.5;
-	
-      videoRef.current.play();
-    }, 2000);
+      const video = videoRef.current;
+      video.style.display = 'block';
+      video.muted = false; // allow audio
+      video.volume = 0.5;
+      video.play();
+    }, 2000); // glitch duration
   };
 
   const handleVideoEnd = () => {
     setFlash(true);
     setStartGlitch(false);
 
-    // Flash duration + fade
     setTimeout(() => {
       setFlash(false);
-      videoRef.current.style.display = 'none';
-      videoRef.current.currentTime = 0;
-      setReveal(true); // start showing elements
+      const video = videoRef.current;
+      video.style.display = 'none';
+      video.currentTime = 0;
+      setReveal(true); // reveal hero elements
     }, 500); // half-second flash
   };
 
   return (
     <div className={`app ${startGlitch ? 'glitching' : ''}`}>
+      {/* Flash overlay */}
       {flash && <div className="white-flash"></div>}
 
       {/* Navbar */}
       <nav className={`navbar ${reveal ? 'reveal' : ''}`}>
         <div className="logo glitch" data-text="LOKI">LOKI</div>
-        <ul className="nav-links">
+
+        {/* Hamburger */}
+        <div className={`hamburger ${menuOpen ? 'active' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <li className="glitch-hover" data-text="Home">Home</li>
           <li className="glitch-hover" data-text="Projects">Projects</li>
           <li className="glitch-hover" data-text="Skills">Skills</li>
@@ -54,7 +64,7 @@ export default function App() {
         <h1 className="hero-title">Hi, I’m <span className="hacker-green">Loki</span></h1>
         <p className="hero-subtitle">I’m a <span className="hacker-green">web developer</span> & ethical hacker in training.</p>
         <p className="hero-quote">"<span className="hacker-green">Control can sometimes be an illusion.</span> But sometimes you need illusion to gain control."</p>
-        <button className="hero-btn" data-hover="AHHH"onClick={handleClick}>BRUH</button>
+        <button className="hero-btn" data-hover="AHHH" onClick={handleClick}>BRUH</button>
       </section>
 
       {/* Fullscreen Video */}
