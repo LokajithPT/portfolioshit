@@ -21,6 +21,22 @@ export default function App() {
     }, 2000); // glitch duration
   };
 
+const [musicMode, setMusicMode] = useState(false);
+const strudelRef = useRef(null); // placeholder for your script object
+
+const toggleMusic = () => {
+  setMusicMode(!musicMode);
+  if (!musicMode) {
+    // start Strudel
+    strudelRef.current = startStrudel(); // assume startStrudel() initializes it
+  } else {
+    // stop Strudel
+    strudelRef.current.stop(); // or whatever API stop method is
+  }
+};
+
+
+
   const handleVideoEnd = () => {
     setFlash(true);
     setStartGlitch(false);
@@ -51,6 +67,10 @@ export default function App() {
         </div>
 
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+	  <button className="music-toggle" onClick={toggleMusic}>
+  {musicMode ? "Music Mode: ON" : "Music Mode: OFF"}
+</button>
+
           <li className="glitch-hover" data-text="Home">Home</li>
           <li className="glitch-hover" data-text="Projects">Projects</li>
           <li className="glitch-hover" data-text="Skills">Skills</li>
