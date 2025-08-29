@@ -1,0 +1,243 @@
+/* Dark hacker theme */
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  background: #000;
+  border-bottom: 2px solid #00ff00; /* hacker green underline */
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* Logo with constant glitch */
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.logo.glitch::before,
+.logo.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00ff00;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+}
+
+.logo.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #00ff00;
+  animation: glitch 1s infinite linear alternate-reverse;
+}
+
+.logo.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #00ff00;
+  animation: glitch 1.3s infinite linear alternate-reverse;
+}
+
+/* Nav links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.nav-links li {
+  position: relative;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+/* Subtle hover effect */
+.nav-links li:hover {
+  color: #00ff00;
+}
+
+/* Glitch only when hovered */
+.nav-links li.glitch-hover::before,
+.nav-links li.glitch-hover::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #00ff00;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  opacity: 0;
+}
+
+.nav-links li.glitch-hover:hover::before {
+  opacity: 1;
+  left: 2px;
+  text-shadow: -2px 0 #00ff00;
+  animation: glitch 0.25s infinite linear alternate-reverse;
+}
+
+.nav-links li.glitch-hover:hover::after {
+  opacity: 1;
+  left: -2px;
+  text-shadow: -2px 0 #00ff00;
+  animation: glitch 0.2s infinite linear alternate-reverse;
+}
+
+/* Keyframes for glitch effect */
+@keyframes glitch {
+  0% { clip: rect(5px, 9999px, 15px, 0); }
+  20% { clip: rect(20px, 9999px, 40px, 0); }
+  40% { clip: rect(10px, 9999px, 60px, 0); }
+  60% { clip: rect(50px, 9999px, 70px, 0); }
+  80% { clip: rect(25px, 9999px, 65px, 0); }
+  100% { clip: rect(15px, 9999px, 35px, 0); }
+}
+
+
+/* Hero Section */
+.hero {
+  position: absolute; /* cover full viewport */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* perfect center */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 800px; /* optional: constrain width */
+  padding: 0 20px;
+  z-index: 10; /* above background but below video if needed */
+}
+
+.hero-title {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.hero-subtitle {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #aaa;
+}
+
+.hacker-green {
+  color: #00ff00;
+}
+
+.hero-quote {
+  font-size: 16px;
+  font-style: italic;
+  color: #888;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.hero-btn {
+  background: transparent;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+
+
+.hero-btn:hover {
+  content: attr(data-hover);
+  background: #00ff00;
+  color: black;
+  box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+/* Glitch & disappear animation */
+.app.glitching * {
+  animation: glitch-fade 0.2s infinite;
+}
+
+@keyframes glitch-fade {
+  0% { transform: translate(0px, 0px); opacity: 1; }
+  20% { transform: translate(-5px, 5px); opacity: 0.8; }
+  40% { transform: translate(5px, -5px); opacity: 0.6; }
+  60% { transform: translate(-5px, 5px); opacity: 0.4; }
+  80% { transform: translate(5px, -5px); opacity: 0.2; }
+  100% { transform: translate(0px, 0px); opacity: 0; }
+}
+
+/* Fullscreen video styling */
+.fullscreen-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 9999;
+  display: none;
+}
+/* White flash effect */
+/* Slow fade “BOOM” flash */
+.white-flash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: white;
+  z-index: 10000;
+  animation: flash 0.5s ease forwards;
+}
+
+@keyframes flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Reveal elements one by one */
+.reveal * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+
+.reveal .logo { animation-delay: 0.1s; }
+.reveal .nav-links li:nth-child(1) { animation-delay: 0.2s; }
+.reveal .nav-links li:nth-child(2) { animation-delay: 0.3s; }
+.reveal .nav-links li:nth-child(3) { animation-delay: 0.4s; }
+.reveal .nav-links li:nth-child(4) { animation-delay: 0.5s; }
+.reveal .nav-links li:nth-child(5) { animation-delay: 0.6s; }
+
+.reveal .hero-title { animation-delay: 0.7s; }
+.reveal .hero-subtitle { animation-delay: 0.8s; }
+.reveal .hero-quote { animation-delay: 0.9s; }
+.reveal .hero-btn { animation-delay: 1s; }
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+

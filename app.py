@@ -1,11 +1,19 @@
-from flask import Flask
+from flask import Flask, send_from_directory
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='dist/static', template_folder='dist')
 
-@app.route("/")
-def home():
-    return "<h1>Hello from Loki 🚀</h1><p>This is lokajithkrishnapt.xyz!</p>"
+# Serve React
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    # If requested file exists in dist folder, serve it
+    if path != "" and os.path.exists(os.path.join(app.template_folder, path)):
+        return send_from_directory(app.template_folder, path)
+    # Otherwise, serve index.html for React routing
+    else:
+        return send_from_directory(app.template_folder, 'index.html')
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(debug=True)
 
