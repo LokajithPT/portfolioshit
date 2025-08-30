@@ -32,29 +32,33 @@ export default function App() {
   };
 
   const toggleMusic = () => {
-    const audio = audioRef.current;
-    if (!audio) return;
+  const audio = audioRef.current;
+  if (!audio) return;
 
-    // resume AudioContext if suspended
-    if (audio.audioCtx && audio.audioCtx.state === "suspended") {
-      audio.audioCtx.resume();
-    }
+  // resume AudioContext if suspended
+  if (audio.audioCtx && audio.audioCtx.state === "suspended") {
+    audio.audioCtx.resume();
+  }
 
-    if (!musicMode) {
+  if (!musicMode) {
+    // pick a random first track
+    currentIndex.current = Math.floor(Math.random() * playlist.length);
+    audio.src = playlist[currentIndex.current];
+    audio.volume = 0.3;
+    audio.play().catch(err => console.log("play error:", err));
+    setMusicMode(true);
+
+    audio.onended = () => {
+      // pick a random next track each time
+      currentIndex.current = Math.floor(Math.random() * playlist.length);
       audio.src = playlist[currentIndex.current];
       audio.play().catch(err => console.log("play error:", err));
-      setMusicMode(true);
-
-      audio.onended = () => {
-        currentIndex.current = (currentIndex.current + 1) % playlist.length;
-        audio.src = playlist[currentIndex.current];
-        audio.play().catch(err => console.log("play error:", err));
-      };
-    } else {
-      audio.pause();
-      setMusicMode(false);
-    }
-  };
+    };
+  } else {
+    audio.pause();
+    setMusicMode(false);
+  }
+};
 
   const handleVideoEnd = () => {
     setFlash(true);
