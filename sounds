@@ -1,0 +1,47 @@
+samples({
+  bd: [
+    'bd/BT0AADA.wav',
+    'bd/BT0AAD0.wav',
+    'bd/BT0A0DA.wav',
+    'bd/BT0A0D3.wav',
+    'bd/BT0A0D0.wav',
+    'bd/BT0A0A7.wav'
+  ],
+  sd: [
+    'sd/rytm-01-classic.wav',
+    'sd/rytm-00-hard.wav'
+  ],
+  hh: [
+    'hh27/000_hh27closedhh.wav',
+    'hh/000_hh3closedhh.wav'
+  ],
+}, 'github:tidalcycles/Dirt-Samples/master/');
+
+stack(
+  // --- DRUMS ---
+  s("bd, [~ <sd!3 sd(3,4,2)>], hh*8")
+    .speed(perlin.range(.7, .9)), // random sample speed
+
+  // --- BASSLINE ---
+  "<a1 b1*2 a1(3,8) e2>"
+    .off(1/8, x => x.add(12).degradeBy(.5)) // random octave jumps
+    .add(perlin.range(0, .5)) // pitch variation
+    .superimpose(add(.05)) // detuned copy
+    .note()
+    .decay(.15).sustain(0) // equal note lengths
+    .s('sawtooth')
+    .gain(.4)
+    .cutoff(sine.slow(7).range(300, 5000)), // sweeping filter
+
+  // --- CHORDS ---
+  "<Am7!3 <Em7 E7b13 Em7 Ebm7b5>>".voicings('lefthand')
+    .superimpose(x => x.add(.04)) // detuned second voice
+    .add(perlin.range(0, .5))
+    .note()
+    .s('sawtooth')
+    .gain(.16)
+    .cutoff(500) // fixed cutoff
+    .attack(1) // fade in chords
+)
+.slow(3/2) // overall groove stretch
+
