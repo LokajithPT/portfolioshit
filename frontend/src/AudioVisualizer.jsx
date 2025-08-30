@@ -16,7 +16,7 @@ export default function AudioVisualizer({ audioRef }) {
       audioCtxRef.current = audioCtx;
 
       const analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 128;
+      analyser.fftSize = 256; // slightly higher for smoother bars
       analyserRef.current = analyser;
 
       try {
@@ -34,7 +34,7 @@ export default function AudioVisualizer({ audioRef }) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     canvas.width = 150;
-    canvas.height = 50;
+    canvas.height = 60; // more vertical space for reactive bars
 
     const bufferLength = analyserRef.current.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
@@ -48,7 +48,8 @@ export default function AudioVisualizer({ audioRef }) {
       let x = 0;
 
       for (let i = 0; i < bufferLength; i++) {
-        const barHeight = dataArray[i] / 3;
+        // make it more reactive by multiplying the value
+        const barHeight = (dataArray[i] / 3) * 1.8; 
         ctx.fillStyle = `hsl(${barHeight + 100}, 100%, 50%)`;
         ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth + 1;
