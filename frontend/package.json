@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@strudel.cycles/core": "^0.10.0",
+    "@strudel.cycles/webaudio": "^0.10.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
