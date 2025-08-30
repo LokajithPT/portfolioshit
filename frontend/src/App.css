@@ -332,3 +332,14 @@ body, html, #root {
   text-shadow: 0 0 10px #0f0;
 }
 
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.music-controls canvas {
+  border-radius: 4px;
+  background-color: #000; /* optional for contrast */
+}
+
