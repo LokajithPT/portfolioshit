@@ -3,11 +3,15 @@ body, html, #root {
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
   font-family: "JetBrains Mono", monospace;
   background: #000;
   color: #fff;
-  overflow-x: hidden;
+  overflow-x: scroll; /* horizontal scroll */
+  overflow-y: hidden; /* prevent vertical scroll */
+  white-space: nowrap; /* prevents wrapping */
 }
+
 
 /* -------------------- Navbar -------------------- */
 .navbar {
@@ -20,9 +24,9 @@ body, html, #root {
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
-  background: #000;
-  border-bottom: 2px solid #00ff00; /* hacker green underline */
-  z-index: 100;
+  background: rgba(0,0,0,0.95); /* slightly transparent */
+  border-bottom: 2px solid #00ff00;
+  z-index: 9999; /* make sure clicks register */
   box-sizing: border-box;
 }
 
@@ -118,19 +122,14 @@ body, html, #root {
 
 /* -------------------- Hero Section -------------------- */
 .hero {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100vw; /* full viewport width */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100%;
-  max-width: 800px;
-  padding: 0 20px;
-  z-index: 150; /* above video, below flash */
+  padding: 0 20px; /* for inner spacing */
+  box-sizing: border-box;
 }
 
 /* Hero text */
@@ -341,5 +340,24 @@ body, html, #root {
 .music-controls canvas {
   border-radius: 4px;
   background-color: #000; /* optional for contrast */
+}
+/* Horizontal layout container */
+.sections-container {
+  display: flex;
+  flex-direction: row;
+  width: 200vw; /* two sections horizontally */
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hero, .skills-section {
+  flex: 0 0 100vw;
+  width: 100vw; /* enforce exact width */
+  height: 100vh;
+  scroll-snap-align: center;
 }
 
