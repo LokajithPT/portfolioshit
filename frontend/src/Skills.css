@@ -1,3 +1,11 @@
+/* Skills.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* ✅ kills horizontal scrollbar everywhere */
+}
+
 .skills-section {
   min-height: 100vh;
   display: flex;
@@ -8,8 +16,7 @@
   color: #fff;
   padding: 4rem 2rem;
   text-align: center;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
+  position: relative;
 }
 
 .skills-heading {
@@ -21,15 +28,24 @@
 
 .skills-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* desktop */
   gap: 20px;
   padding: 20px;
   width: 100%;
   max-width: 1000px;
+  overflow-x: hidden;  /* ✅ block horizontal scroll */
+  overflow-y: auto;    /* ✅ allow vertical scroll */
 }
+
+/* Hide scrollbars cross-browser */
 .skills-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
 }
+.skills-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .skill-card {
   background: #1e1e1e;
   color: white;
@@ -37,7 +53,7 @@
   padding: 20px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
   overflow: hidden;
   min-height: 150px;
   box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
@@ -56,38 +72,89 @@
   margin-top: 10px;
   font-size: 0.9rem;
   line-height: 1.4;
-  word-wrap: break-word;    /* Force text to wrap */
-  white-space: normal;      /* Allow normal wrapping */
-  overflow-wrap: break-word; /* Handle long words properly */
-  max-width: 100%;          /* Keep it contained */
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: 100%;
+  opacity: 0;
+  max-height: 0;
+  transition: all 0.4s ease;
 }
 
-/* Hover effect */
+/* Hover pulse effect */
 .skill-card:hover {
-  transform: translateY(-8px) scale(1.03);
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
 }
 
-/* Expanded state */
+/* Active state = full attention */
 .skill-card.active {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(1.2);
-  z-index: 10;
-  width: 400px;
-  max-width: 90%;   /* ✅ Stops it from overflowing screen */
-  min-height: 300px;
+  transform: translate(-50%, -50%) scale(1.15);
+  z-index: 20;
+  width: 420px;
+  max-width: 90%;
+  min-height: 320px;
   background: #111;
-  padding: 20px;    /* ✅ Gives breathing space */
-  box-shadow: 0 0 40px rgba(0, 255, 0, 0.8);
-  text-align: center; /* Keep it neat */
+  padding: 25px;
+  box-shadow: 0 0 45px rgba(0, 255, 0, 0.9);
 }
 
-/* Reveal description when active */
+/* Reveal text smoothly */
 .skill-card.active p {
   opacity: 1;
   max-height: 500px;
-  transition: all 0.4s ease;
+}
+
+/* Dim background when active */
+.skills-container::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 15;
+}
+.skill-card.active ~ .skills-container::after {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ✅ Mobile tweaks */
+@media (max-width: 768px) {
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr); /* ✅ force 2 columns */
+    gap: 15px;
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .skill-card {
+    min-height: 140px;
+    padding: 15px;
+  }
+
+  .skills-heading {
+    font-size: 2rem;
+  }
+
+  .skill-card.active {
+    width: 90%;
+    min-height: 260px;
+  }
+}
+
+/* ✅ Ultra-small screens (like <400px) → 1 column */
+@media (max-width: 400px) {
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
 }
 
