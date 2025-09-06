@@ -121,6 +121,8 @@ html, body {
   pointer-events: none;
   transition: opacity 0.4s ease;
   z-index: 15;
+  margin-top:20px;
+  margin-bottom:20px;
 }
 .skill-card.active ~ .skills-container::after {
   opacity: 1;

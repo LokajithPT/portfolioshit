@@ -7,6 +7,7 @@ import song3 from "./assets/song3.mp3";
 import song4 from "./assets/song4.mp3";
 import AudioVisualizer from "./AudioVisualizer";
 import Skills from "./Skills";
+import Projects from "./Projects";
 
 
 
@@ -57,6 +58,8 @@ export default function App() {
   const containerRef = useRef(null);
   const heroRef = useRef(null);
   const skillsRef = useRef(null);
+	const projectsRef = useRef(null);
+
 	const typedText = useTypewriter(["LOKI", "Lokajith..."], 150, 80, 1000);
 
 
@@ -131,15 +134,17 @@ export default function App() {
         <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
           <li className="glitch-hover" data-text="Home" onClick={() => scrollToSection(heroRef)}>Home</li>
           <li className="glitch-hover" data-text="Skills" onClick={() => scrollToSection(skillsRef)}>Skills</li>
-	  <li className="glitch-hover" data-text="Projects" onClick={() => scrollToSection(heroRef)}>Projects</li>
+	  <li className="glitch-hover" data-text="Projects" onClick={() => scrollToSection(projectsRef)}>Projects</li>
           <li className="glitch-hover" data-text="About" onClick={() => console.log("hey there")}>About</li>
           <li className="glitch-hover" data-text="Contact" onClick={() => scrollToSection(heroRef)}>Contact</li>
         </ul>
 
         <div className="music-controls">
           <AudioVisualizer audioRef={audioRef} />
-          <button className={`music-toggle ${musicMode ? 'on' : ''}`} onClick={toggleMusic}>
-            {musicMode ? "HEHE MODE: ON 🖤" : "HEHE MODE: OFF"}
+          <button className={`music-toggle ${musicMode ? 'on' : ''}`} onClick={toggleMusic}
+	              data-label={musicMode ? "HEHE MODE: ON 🖤" : "HEHE MODE: OFF"}
+>
+	  HEHE
           </button>
         </div>
       </nav>
@@ -155,8 +160,17 @@ export default function App() {
         </section>
 
         <section ref={skillsRef} className={`skills-section ${reveal ? 'reveal' : ''}`}>
+
           <Skills />
+
+
         </section>
+
+
+	  	    <section ref={projectsRef} className={`projects-section ${reveal ? 'reveal' : ''}`}>
+    <Projects />
+  </section>
+
       </div>
 
       <video ref={videoRef} className="fullscreen-video" muted onEnded={handleVideoEnd}>

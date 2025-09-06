@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cringe Survey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #f0f3f6;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+    .form-container {
+      width: 100%;
+      max-width: 800px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+    .form-header {
+      border-bottom: 2px solid #4285f4;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+    .form-header h1 { font-size: 2.2em; font-weight: 500; color: #202124; margin-bottom: 10px; }
+    .form-header p { font-size: 1.1em; color: #5f6368; }
+    .question-card {
+      background-color: #f7f9fb;
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+    .question-card p, .question-card label { font-size: 1.1em; color: #202124; margin-bottom: 15px; }
+    .question-card input[type="text"] {
+      width: 100%; padding: 10px 0; border: none;
+      border-bottom: 1px solid #ccc; font-size: 1em;
+      background: transparent; transition: border-bottom-color 0.3s;
+    }
+    .question-card input[type="text"]:focus { outline: none; border-bottom-color: #4285f4; }
+    .checkbox-group, .radio-group { display: flex; flex-direction: column; gap: 10px; }
+    .checkbox-group label, .radio-group label {
+      display: flex; align-items: center; font-size: 1em;
+      cursor: pointer; color: #5f6368;
+    }
+    .checkbox-group input[type="checkbox"], .radio-group input[type="radio"] {
+      margin-right: 10px; accent-color: #4285f4;
+    }
+    .form-footer { display: flex; justify-content: flex-end; padding-top: 20px; }
+    .submit-button {
+      background-color: #4285f4; color: #ffffff; border: none;
+      padding: 12px 24px; border-radius: 4px; font-size: 1em;
+      cursor: pointer; transition: background-color 0.3s;
+    }
+    .submit-button:hover { background-color: #357ae8; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-header">
+      <h1>Cringe Survey</h1>
+      <p>Help us figure out what people think is cringe 😅</p>
+    </div>
+
+    <form method="POST" action="/survey">
+      <!-- 1 -->
+      <div class="question-card">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Your answer">
+      </div>
+
+      <!-- 2 -->
+      <div class="question-card">
+        <p>What do you think is the cringiest social media platform?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="cringe_platform" value="Facebook"> Facebook</label>
+          <label><input type="radio" name="cringe_platform" value="TikTok"> TikTok</label>
+          <label><input type="radio" name="cringe_platform" value="Instagram"> Instagram</label>
+          <label><input type="radio" name="cringe_platform" value="Twitter"> Twitter</label>
+        </div>
+      </div>
+
+      <!-- 3 -->
+      <div class="question-card">
+        <p>Which of these do you consider cringe? (Select all that apply)</p>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="cringe_choices" value="Fortnite dances"> Fortnite dances</label>
+          <label><input type="checkbox" name="cringe_choices" value="Lip syncing videos"> Lip syncing videos</label>
+          <label><input type="checkbox" name="cringe_choices" value="Motivational reels"> Motivational reels</label>
+          <label><input type="checkbox" name="cringe_choices" value="Fake pranks"> Fake pranks</label>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="question-card">
+        <label>What's the most cringe slang word right now?</label>
+        <input type="text" name="cringe_slang" placeholder="e.g. rizz, skibidi">
+      </div>
+
+      <!-- 5 -->
+      <div class="question-card">
+        <p>Is public vlogging cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="public_vlogging" value="Yes"> Yes</label>
+          <label><input type="radio" name="public_vlogging" value="No"> No</label>
+          <label><input type="radio" name="public_vlogging" value="Depends"> Depends</label>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="question-card">
+        <p>Do you think couples oversharing online is cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="couple_overshare" value="Yes"> Yes</label>
+          <label><input type="radio" name="couple_overshare" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="question-card">
+        <label>What’s the most cringe pickup line you’ve heard?</label>
+        <input type="text" name="pickup_line">
+      </div>
+
+      <!-- 8 -->
+      <div class="question-card">
+        <p>Which of these trends is the most cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="cringe_trend" value="NPC TikTok"> NPC TikTok</label>
+          <label><input type="radio" name="cringe_trend" value="Sigma grindset"> Sigma grindset</label>
+          <label><input type="radio" name="cringe_trend" value="Skibidi toilet"> Skibidi toilet</label>
+          <label><input type="radio" name="cringe_trend" value="AI voiceovers"> AI voiceovers</label>
+        </div>
+      </div>
+
+      <!-- 9 -->
+      <div class="question-card">
+        <p>Rate how cringe it is when someone flexes money online</p>
+        <div class="radio-group">
+          <label><input type="radio" name="money_flex" value="Not cringe"> Not cringe</label>
+          <label><input type="radio" name="money_flex" value="A little cringe"> A little cringe</label>
+          <label><input type="radio" name="money_flex" value="Very cringe"> Very cringe</label>
+        </div>
+      </div>
+
+      <!-- 10 -->
+      <div class="question-card">
+        <label>What’s the cringiest movie scene you’ve ever watched?</label>
+        <input type="text" name="cringe_movie">
+      </div>
+
+      <!-- 11 -->
+      <div class="question-card">
+        <p>Are gym selfies cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="gym_selfies" value="Yes"> Yes</label>
+          <label><input type="radio" name="gym_selfies" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 12 -->
+      <div class="question-card">
+        <p>Are inspirational LinkedIn posts cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="linkedin_posts" value="Yes"> Yes</label>
+          <label><input type="radio" name="linkedin_posts" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 13 -->
+      <div class="question-card">
+        <p>Is “bro” culture cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="bro_culture" value="Yes"> Yes</label>
+          <label><input type="radio" name="bro_culture" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 14 -->
+      <div class="question-card">
+        <p>Are fake crying influencers cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="fake_crying" value="Yes"> Yes</label>
+          <label><input type="radio" name="fake_crying" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 15 -->
+      <div class="question-card">
+        <p>Do you think saying “touch grass” is cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="touch_grass" value="Yes"> Yes</label>
+          <label><input type="radio" name="touch_grass" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 16 -->
+      <div class="question-card">
+        <p>Are crypto bros cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="crypto_bros" value="Yes"> Yes</label>
+          <label><input type="radio" name="crypto_bros" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 17 -->
+      <div class="question-card">
+        <p>Is overusing filters on pics cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="filters" value="Yes"> Yes</label>
+          <label><input type="radio" name="filters" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 18 -->
+      <div class="question-card">
+        <p>Are roleplaying accounts cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="roleplay" value="Yes"> Yes</label>
+          <label><input type="radio" name="roleplay" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 19 -->
+      <div class="question-card">
+        <p>Are couples TikTok dances cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="tiktok_dances" value="Yes"> Yes</label>
+          <label><input type="radio" name="tiktok_dances" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 20 -->
+      <div class="question-card">
+        <p>Are public singing videos cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="public_singing" value="Yes"> Yes</label>
+          <label><input type="radio" name="public_singing" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 21 -->
+      <div class="question-card">
+        <label>What’s the cringiest anime moment you’ve seen?</label>
+        <input type="text" name="cringe_anime">
+      </div>
+
+      <!-- 22 -->
+      <div class="question-card">
+        <p>Are gaming rage clips cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="gaming_rage" value="Yes"> Yes</label>
+          <label><input type="radio" name="gaming_rage" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 23 -->
+      <div class="question-card">
+        <p>Are people bragging about IQ cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="iq_brag" value="Yes"> Yes</label>
+          <label><input type="radio" name="iq_brag" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 24 -->
+      <div class="question-card">
+        <p>Are copycat memes cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="copycat_memes" value="Yes"> Yes</label>
+          <label><input type="radio" name="copycat_memes" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 25 -->
+      <div class="question-card">
+        <p>Are overly long hashtags cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="hashtags" value="Yes"> Yes</label>
+          <label><input type="radio" name="hashtags" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 26 -->
+      <div class="question-card">
+        <p>Are reaction videos cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="reaction_videos" value="Yes"> Yes</label>
+          <label><input type="radio" name="reaction_videos" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 27 -->
+      <div class="question-card">
+        <p>Are “storytime” TikToks cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="storytime" value="Yes"> Yes</label>
+          <label><input type="radio" name="storytime" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 28 -->
+      <div class="question-card">
+        <p>Is faking accents online cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="fake_accents" value="Yes"> Yes</label>
+          <label><input type="radio" name="fake_accents" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 29 -->
+      <div class="question-card">
+        <p>Are sad fan edits cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="fan_edits" value="Yes"> Yes</label>
+          <label><input type="radio" name="fan_edits" value="No"> No</label>
+        </div>
+      </div>
+
+      <!-- 30 -->
+      <div class="question-card">
+        <p>Are “Top G” quotes cringe?</p>
+        <div class="radio-group">
+          <label><input type="radio" name="topg_quotes" value="Yes"> Yes</label>
+          <label><input type="radio" name="topg_quotes" value="No"> No</label>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button type="submit" class="submit-button">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+

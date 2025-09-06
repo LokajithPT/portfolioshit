@@ -7,7 +7,7 @@ body, html, #root {
   font-family: "JetBrains Mono", monospace;
   background: #000;
   color: #fff;
-  overflow-x: scroll; /* horizontal scroll */
+  overflow-x: auto; /* horizontal scroll */
   overflow-y: hidden; /* prevent vertical scroll */
   white-space: nowrap; /* prevents wrapping */
 }
@@ -272,10 +272,11 @@ body, html, #root {
     position: fixed;
     top: 70px;
     right: -100%;
-    height: calc(100vh - 70px);
-    width: 200px;
+    height:100vh;
+    width: 90%;
     flex-direction: column;
-    background: #000;
+    justify-content: center;
+    background: rgba(0,0,0,0.95);
     gap: 30px;
     padding: 20px;
     transition: right 0.3s ease;
@@ -284,7 +285,7 @@ body, html, #root {
 
   .nav-links.open { right: 0; }
 
-  .nav-links li { font-size: 20px; opacity: 0; transform: translateY(20px); }
+  .nav-links li { font-size: 24px; opacity: 0; transform: translateY(20px); }
 
   /* Staggered animation when open */
   .nav-links.open li:nth-child(1) { animation: fadeInUp 0.4s forwards 0.1s; }
@@ -309,6 +310,8 @@ body, html, #root {
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+  content: attr(data-label);
+
 }
 
 .music-toggle.on {
@@ -323,12 +326,27 @@ body, html, #root {
   50% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; }
   100% { box-shadow: 0 0 5px #0f0; }
 }
-
+@media (max-width: 500px) {
+  .music-toggle {
+    width: 60px;   /* square size */
+    height: 50px;  /* make it square */
+    border-radius: 12px; /* optional rounded look */
+    font-size: 10px;   /* shrink font so it fits */
+    padding: 0;          /* remove extra spacing */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
 
 .music-toggle:hover {
   background: #0f0;
   color: black;
   text-shadow: 0 0 10px #0f0;
+}
+
+.music-toggle::before{
+	.music-toggle::before {content:"";}
 }
 
 .music-controls {
@@ -345,7 +363,7 @@ body, html, #root {
 .sections-container {
   display: flex;
   flex-direction: row;
-  width: 200vw; /* two sections horizontally */
+  width: 300vw; /* two sections horizontally */
   height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
@@ -354,7 +372,7 @@ body, html, #root {
   -webkit-overflow-scrolling: touch;
 }
 
-.hero, .skills-section {
+.hero, .skills-section , .projects-section {
   flex: 0 0 100vw;
   width: 100vw; /* enforce exact width */
   height: 100vh;

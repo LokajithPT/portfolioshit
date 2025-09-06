@@ -1,0 +1,223 @@
+.projects-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  color: #fff;
+  padding: 2rem;
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;   /* stacked vertically */
+  gap: 30px;
+  max-width: 600px;
+  width: 100%;
+  align-items: center;
+}
+
+/* Base card */
+.project-card {
+  position: relative;
+  width: 100%;
+  background: #111;
+  border-radius: 14px;
+  padding: 25px;
+  text-align: center;
+  cursor: pointer;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1;
+  border: 1px solid rgba(0, 255, 0, 0.25);
+  transition: transform 0.3s ease;
+}
+
+/* Neon border run-around */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    90deg,
+    #0f0,
+    #0ff,
+    #0f0,
+    #ff00ff,
+    #0f0
+  );
+  background-size: 400% 400%;
+  border-radius: inherit;
+  z-index: -2;
+  animation: glow-run 6s linear infinite;
+  filter: blur(6px);
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #111;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+/* Title */
+.project-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.5rem;
+  color: #0f0;
+  text-shadow: 0 0 8px rgba(0, 255, 0, 0.7);
+  letter-spacing: 1px;
+}
+
+/* Description */
+.project-card p {
+  font-size: 1rem;
+  color: #bbb;
+  margin: 0;
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ✅ Glitch effect like logo */
+.project-card.glitch::before,
+.project-card.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  color: #0f0;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-card.glitch:hover::before {
+  opacity: 1;
+  left: 2px;
+  text-shadow: -2px 0 #0f0;
+  animation: glitch 0.3s infinite linear alternate-reverse;
+}
+
+.project-card.glitch:hover::after {
+  opacity: 1;
+  left: -2px;
+  text-shadow: -2px 0 #f0f;
+  animation: glitch 0.2s infinite linear alternate-reverse;
+}
+
+/* 🔥 Fullscreen overlay */
+.project-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #000; /* solid hacker black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* Fullscreen content */
+.overlay-content {
+  width: 100%;
+  height: 100%;
+  background: #111;
+  color: #fff;
+  padding: 60px 40px;
+  border-radius: 0;
+  position: relative;
+  overflow-y: auto;
+  animation: zoomIn 0.4s ease forwards;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay-content h2 {
+  font-size: 2.2rem;
+  color: #0f0;
+  text-shadow: 0 0 12px rgba(0,255,0,0.7);
+  margin-bottom: 20px;
+}
+
+.overlay-content p {
+  font-size: 1.2rem;
+  color: #bbb;
+  max-width: 800px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Close button */
+.close-btn {
+  position: fixed;
+  top: 50px;
+  right: 30px;
+  background: none;
+  border: none;
+  color: #0f0;
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 9999; /* always on top */
+  text-shadow: 0 0 10px rgba(0,255,0,0.8);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+  color: #f0f;
+  transform: scale(1.1);
+}
+/* Animations */
+@keyframes glow-run {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes glitch {
+  0% { clip: rect(5px, 9999px, 15px, 0); }
+  20% { clip: rect(20px, 9999px, 40px, 0); }
+  40% { clip: rect(10px, 9999px, 60px, 0); }
+  60% { clip: rect(50px, 9999px, 70px, 0); }
+  80% { clip: rect(25px, 9999px, 65px, 0); }
+  100% { clip: rect(15px, 9999px, 35px, 0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.typewriter {
+  font-family: "Courier New", monospace;
+  color: #0f0;
+  text-shadow: 0 0 6px rgba(0,255,0,0.7);
+  font-size: 1.1rem;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  max-height: 70vh;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+  border-left: 2px solid #0f0;
+}
+
