@@ -182,7 +182,71 @@
   color: #f0f;
   transform: scale(1.1);
 }
-/* Animations */
+
+/* Typewriter */
+.typewriter {
+  font-family: "Courier New", monospace;
+  color: #0f0;
+  text-shadow: 0 0 6px rgba(0,255,0,0.7);
+  font-size: 1.1rem;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  max-height: 70vh;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+  border-left: 2px solid #0f0;
+}
+
+/* Flowchart */
+.flowchart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.node {
+  padding: 20px 40px;
+  border: 2px solid #0f0;
+  border-radius: 8px;
+  background: #111;
+  box-shadow: 0 0 12px rgba(0, 255, 0, 0.5);
+  font-family: "Courier New", monospace;
+  color: #0f0;
+}
+
+.line {
+  width: 80px;
+  height: 4px;
+  background: #0f0;
+  transition: all 0.3s ease;
+}
+
+/* states */
+.line.send {
+  animation: pulse-green 1s infinite;
+}
+.line.fetch {
+  animation: pulse-blue 1s infinite;
+  background: #0ff;
+}
+.line.delete {
+  animation: pulse-red 1s infinite;
+  background: #f00;
+}
+.line.offline {
+  background: gray;
+  filter: blur(2px);
+}
+.line.buffer {
+  animation: pulse-orange 1s infinite;
+  background: orange;
+}
+
+/* animations */
 @keyframes glow-run {
   0%   { background-position: 0% 50%; }
   50%  { background-position: 100% 50%; }
@@ -207,17 +271,166 @@
   from { transform: scale(0.95); opacity: 0; }
   to   { transform: scale(1); opacity: 1; }
 }
-.typewriter {
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes pulse-blue {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes pulse-orange {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.flowchart-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+/* Keep previous flow styles */
+
+/* Typewriter log */
+.flow-desc {
   font-family: "Courier New", monospace;
   color: #0f0;
   text-shadow: 0 0 6px rgba(0,255,0,0.7);
-  font-size: 1.1rem;
+  font-size: 1rem;
+  margin-top: 30px;
+  text-align: center;
   white-space: pre-wrap;
-  line-height: 1.6;
-  max-height: 70vh;
-  overflow-y: auto;
-  animation: fadeIn 0.3s ease;
-  padding: 20px;
-  border-left: 2px solid #0f0;
+  max-width: 700px;
+  line-height: 1.5;
+  border-top: 1px solid #0f0;
+  padding-top: 15px;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Node pop-in */
+.node-wrapper {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s ease;
+}
+
+.node-wrapper.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.node small {
+  display: block;
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+.line-label {
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  color: #888;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.line-label.active {
+  color: #0f0;
+  text-shadow: 0 0 6px rgba(0,255,0,0.7);
+  opacity: 1;
+}
+
+/* keep flow-desc styling */
+.fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.typewriter {
+  animation: fadeOut 1s ease forwards;
+}
+
+/* Sexy node animation */
+.node-wrapper {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.8s ease;
+}
+
+.node-wrapper.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Pulsating line */
+.line.active {
+  animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from { background-color: #ff0; box-shadow: 0 0 8px #ff0; }
+  to { background-color: #0f0; box-shadow: 0 0 18px #0f0; }
+}
+
+/* Buffer line style */
+.line.buffer.active {
+  background: red;
+  animation: glitch-pulse 0.7s infinite;
+}
+
+@keyframes glitch-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+.node.leviathan {
+  background: #111;
+  border: 2px solid #0f0;
+  color: #0f0;
+  text-shadow: 0 0 8px #0f0;
+}
+
+.node.c2c {
+  background: #111;
+  border: 2px solid cyan;
+  color: cyan;
+  text-shadow: 0 0 8px cyan;
+}
+
+.node.token {
+  background: #111;
+  border: 2px solid #ff0;
+  color: #ff0;
+  text-shadow: 0 0 8px #ff0;
+}
+
+.node.mac {
+  background: #111;
+  border: 2px solid orange;
+  color: orange;
+  text-shadow: 0 0 8px orange;
+}
+
+.access-nodes {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.node.camera, .node.mic, .node.files {
+  border: 2px solid #f0f;
+  color: #f0f;
+  text-shadow: 0 0 8px #f0f;
+}
+
+.node.decoy {
+  background: #111;
+  border: 2px solid purple;
+  color: violet;
+  text-shadow: 0 0 10px violet;
 }
 

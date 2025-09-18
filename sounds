@@ -1,12 +1,3 @@
-samples({
-  bd: [
-    'bd/BT0AADA.wav',
-    'bd/BT0AAD0.wav',
-    'bd/BT0A0DA.wav',
-    'bd/BT0A0D3.wav',
-    'bd/BT0A0D0.wav',
-    'bd/BT0A0A7.wav'
-  ],
   sd: [
     'sd/rytm-01-classic.wav',
     'sd/rytm-00-hard.wav'
@@ -43,5 +34,9 @@ stack(
     .cutoff(500) // fixed cutoff
     .attack(1) // fade in chords
 )
-.slow(3/2) // overall groove stretch
+
+
+
+
+
 
