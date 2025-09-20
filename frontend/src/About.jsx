@@ -21,7 +21,6 @@ export default function About() {
   });
   const [activeBox, setActiveBox] = useState(null);
 
-  // Initialize boxes (levitating)
   useEffect(() => {
     const initialBoxes = roles.map((role, i) => ({
       role,
@@ -33,7 +32,6 @@ export default function About() {
     setBoxes(initialBoxes);
   }, []);
 
-  // Update web origin to bottom of ()
   useEffect(() => {
     const updateOrigin = () => {
       if (roleRef.current) {
@@ -46,7 +44,6 @@ export default function About() {
     return () => window.removeEventListener("resize", updateOrigin);
   }, [typedText]);
 
-  // Typing + dragging effect
   useEffect(() => {
     if (currentRoleIndex >= roles.length) return;
 
@@ -58,11 +55,10 @@ export default function About() {
       subIndex++;
       if (subIndex > role.length) {
         clearInterval(typeInterval);
-        // Activate box
+
         const box = boxes.find((b) => b.role === role);
         if (box) setActiveBox(box.id);
 
-        // Collect box after animation
         setTimeout(() => {
           setBoxes((prev) =>
             prev.map((b) => (b.id === box.id ? { ...b, collected: true } : b)),
@@ -87,32 +83,34 @@ export default function About() {
         )
       </h2>
 
+      <svg className="web-layer" width="100%" height="100%">
+        {activeBox !== null && boxes[activeBox] && (
+          <line
+            x1={webOrigin.x}
+            y1={webOrigin.y}
+            x2={boxes[activeBox].x + 60}
+            y2={boxes[activeBox].y + 25}
+            stroke="#0ff"
+            strokeWidth="2"
+            strokeDasharray="8"
+            className="web-line"
+          />
+        )}
+      </svg>
+
       <div className="floating-container">
         {boxes.map((b) =>
           b.collected ? null : (
             <div
               key={b.id}
-              className="floating-card"
+              className={`floating-card ${activeBox === b.id ? "active" : ""}`}
               style={{
-                left: activeBox === b.id ? webOrigin.x - 50 : b.x,
+                left: activeBox === b.id ? webOrigin.x - 60 : b.x,
                 top: activeBox === b.id ? webOrigin.y - 25 : b.y,
                 transition: activeBox === b.id ? "all 2s ease-in-out" : "none",
               }}
             >
               {b.role}
-              {/* draw a line (web) */}
-              {activeBox === b.id && (
-                <svg className="web-line">
-                  <line
-                    x1={webOrigin.x}
-                    y1={webOrigin.y}
-                    x2={b.x + 50}
-                    y2={b.y + 25}
-                    stroke="#00ff00"
-                    strokeWidth="2"
-                  />
-                </svg>
-              )}
             </div>
           ),
         )}
