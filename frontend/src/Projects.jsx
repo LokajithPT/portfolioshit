@@ -4,7 +4,12 @@ import Flowchart from "./Flowchart";
 import FlowchartLeviathan from "./FlowchartLeviathan";
 
 /* Typewriter Hook */
-function useTypewriter(lines = [], speed = 50, delay = 800, mistakeChance = 0.08) {
+function useTypewriter(
+  lines = [],
+  speed = 50,
+  delay = 800,
+  mistakeChance = 0.08,
+) {
   const [text, setText] = useState("");
   const [lineIndex, setLineIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -22,18 +27,21 @@ function useTypewriter(lines = [], speed = 50, delay = 800, mistakeChance = 0.08
     let timeout;
 
     if (charIndex < currentLine.length) {
-      timeout = setTimeout(() => {
-        if (!isMistaking && Math.random() < mistakeChance) {
-          setText((prev) => prev + getRandomChar());
-          setIsMistaking(true);
-        } else if (isMistaking) {
-          setText((prev) => prev.slice(0, -1));
-          setIsMistaking(false);
-        } else {
-          setText((prev) => prev + currentLine[charIndex]);
-          setCharIndex(charIndex + 1);
-        }
-      }, isMistaking ? speed / 2 : speed);
+      timeout = setTimeout(
+        () => {
+          if (!isMistaking && Math.random() < mistakeChance) {
+            setText((prev) => prev + getRandomChar());
+            setIsMistaking(true);
+          } else if (isMistaking) {
+            setText((prev) => prev.slice(0, -1));
+            setIsMistaking(false);
+          } else {
+            setText((prev) => prev + currentLine[charIndex]);
+            setCharIndex(charIndex + 1);
+          }
+        },
+        isMistaking ? speed / 2 : speed,
+      );
     }
 
     if (charIndex === currentLine.length && !isMistaking) {
@@ -60,10 +68,26 @@ export default function Projects() {
   const [activeProject, setActiveProject] = useState(null);
 
   const projects = [
-    { title: "GILMA", description: "GIt Like Management System ... A github clone built for me and only me " },
-    { title: "LEVIATHAN", description: "Biggest and most flexible malware creation and c2c framework " },
-    { title: "lowkey", description: "Simple coding language from basic python which uses simple syntax ... just a poc " },
-    { title: "pisspoopnfart", description: "Encryption and decryption thing i made to encode and decode files " },
+    {
+      title: "GILMA",
+      description:
+        "GIt Like Management System ... A github clone built for me and only me ",
+    },
+    {
+      title: "LEVIATHAN",
+      description:
+        "Biggest and most flexible malware creation and c2c framework ",
+    },
+    {
+      title: "lowkey",
+      description:
+        "Simple coding language from basic python which uses simple syntax ... just a poc ",
+    },
+    {
+      title: "pisspoopnfart",
+      description:
+        "Encryption and decryption thing i made to encode and decode files ",
+    },
   ];
 
   // Gilma storyline
@@ -88,14 +112,14 @@ export default function Projects() {
     activeProject?.title === "GILMA" ? gilmaLines : [],
     60,
     1000,
-    0.08
+    0.08,
   );
 
   const { text: typedLeviathan, done: leviathanDone } = useTypewriter(
     activeProject?.title === "LEVIATHAN" ? leviathanLines : [],
     60,
     1000,
-    0.08
+    0.08,
   );
 
   return (
@@ -114,7 +138,9 @@ export default function Projects() {
 
       {activeProject && (
         <div className="project-overlay">
-          <button className="close-btn" onClick={() => setActiveProject(null)}>✕</button>
+          <button className="close-btn" onClick={() => setActiveProject(null)}>
+            ✕
+          </button>
 
           <div className="overlay-content">
             <h2>{activeProject.title}</h2>
@@ -124,7 +150,9 @@ export default function Projects() {
               !gilmaDone ? (
                 <pre className="typewriter">{typedGilma}</pre>
               ) : (
-                <div className="fade-in"><Flowchart /></div>
+                <div className="fade-in">
+                  <Flowchart />
+                </div>
               )
             ) : null}
 
@@ -133,18 +161,20 @@ export default function Projects() {
               !leviathanDone ? (
                 <pre className="typewriter">{typedLeviathan}</pre>
               ) : (
-                <div className="fade-in"><FlowchartLeviathan /></div>
+                <div className="fade-in">
+                  <FlowchartLeviathan />
+                </div>
               )
             ) : null}
 
             {/* Other projects */}
-            {activeProject.title !== "GILMA" && activeProject.title !== "LEVIATHAN" && (
-              <p>{activeProject.description}</p>
-            )}
+            {activeProject.title !== "GILMA" &&
+              activeProject.title !== "LEVIATHAN" && (
+                <p>{activeProject.description}</p>
+              )}
           </div>
         </div>
       )}
     </div>
   );
 }
-

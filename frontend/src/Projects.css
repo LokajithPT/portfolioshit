@@ -9,7 +9,7 @@
 
 .projects-container {
   display: flex;
-  flex-direction: column;   /* stacked vertically */
+  flex-direction: column; /* stacked vertically */
   gap: 30px;
   max-width: 600px;
   width: 100%;
@@ -43,14 +43,7 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(
-    90deg,
-    #0f0,
-    #0ff,
-    #0f0,
-    #ff00ff,
-    #0f0
-  );
+  background: linear-gradient(90deg, #0f0, #0ff, #0f0, #ff00ff, #0f0);
   background-size: 400% 400%;
   border-radius: inherit;
   z-index: -2;
@@ -151,7 +144,7 @@
 .overlay-content h2 {
   font-size: 2.2rem;
   color: #0f0;
-  text-shadow: 0 0 12px rgba(0,255,0,0.7);
+  text-shadow: 0 0 12px rgba(0, 255, 0, 0.7);
   margin-bottom: 20px;
 }
 
@@ -174,8 +167,10 @@
   font-size: 2.5rem;
   cursor: pointer;
   z-index: 9999; /* always on top */
-  text-shadow: 0 0 10px rgba(0,255,0,0.8);
-  transition: color 0.2s ease, transform 0.2s ease;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .close-btn:hover {
@@ -187,7 +182,7 @@
 .typewriter {
   font-family: "Courier New", monospace;
   color: #0f0;
-  text-shadow: 0 0 6px rgba(0,255,0,0.7);
+  text-shadow: 0 0 6px rgba(0, 255, 0, 0.7);
   font-size: 1.1rem;
   white-space: pre-wrap;
   line-height: 1.6;
@@ -248,45 +243,93 @@
 
 /* animations */
 @keyframes glow-run {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes glitch {
-  0% { clip: rect(5px, 9999px, 15px, 0); }
-  20% { clip: rect(20px, 9999px, 40px, 0); }
-  40% { clip: rect(10px, 9999px, 60px, 0); }
-  60% { clip: rect(50px, 9999px, 70px, 0); }
-  80% { clip: rect(25px, 9999px, 65px, 0); }
-  100% { clip: rect(15px, 9999px, 35px, 0); }
+  0% {
+    clip: rect(5px, 9999px, 15px, 0);
+  }
+  20% {
+    clip: rect(20px, 9999px, 40px, 0);
+  }
+  40% {
+    clip: rect(10px, 9999px, 60px, 0);
+  }
+  60% {
+    clip: rect(50px, 9999px, 70px, 0);
+  }
+  80% {
+    clip: rect(25px, 9999px, 65px, 0);
+  }
+  100% {
+    clip: rect(15px, 9999px, 35px, 0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes zoomIn {
-  from { transform: scale(0.95); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes pulse-green {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 @keyframes pulse-blue {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 @keyframes pulse-red {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 @keyframes pulse-orange {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 .flowchart-wrapper {
   display: flex;
@@ -301,7 +344,7 @@
 .flow-desc {
   font-family: "Courier New", monospace;
   color: #0f0;
-  text-shadow: 0 0 6px rgba(0,255,0,0.7);
+  text-shadow: 0 0 6px rgba(0, 255, 0, 0.7);
   font-size: 1rem;
   margin-top: 30px;
   text-align: center;
@@ -341,7 +384,7 @@
 
 .line-label.active {
   color: #0f0;
-  text-shadow: 0 0 6px rgba(0,255,0,0.7);
+  text-shadow: 0 0 6px rgba(0, 255, 0, 0.7);
   opacity: 1;
 }
 
@@ -372,8 +415,14 @@
 }
 
 @keyframes pulse {
-  from { background-color: #ff0; box-shadow: 0 0 8px #ff0; }
-  to { background-color: #0f0; box-shadow: 0 0 18px #0f0; }
+  from {
+    background-color: #ff0;
+    box-shadow: 0 0 8px #ff0;
+  }
+  to {
+    background-color: #0f0;
+    box-shadow: 0 0 18px #0f0;
+  }
 }
 
 /* Buffer line style */
@@ -383,9 +432,15 @@
 }
 
 @keyframes glitch-pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.2; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .node.leviathan {
   background: #111;
@@ -421,7 +476,9 @@
   margin-top: 15px;
 }
 
-.node.camera, .node.mic, .node.files {
+.node.camera,
+.node.mic,
+.node.files {
   border: 2px solid #f0f;
   color: #f0f;
   text-shadow: 0 0 8px #f0f;
@@ -433,4 +490,3 @@
   color: violet;
   text-shadow: 0 0 10px violet;
 }
-
